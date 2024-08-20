@@ -9,10 +9,7 @@
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	"features": {
-		"ghcr.io/SwissDataScienceCenter/devcontainer-features/renku:1": {},
-		"ghcr.io/devcontainers/features/python:1": {
-			"version": "3.11"
-		}
+		"ghcr.io/SwissDataScienceCenter/devcontainer-features/renku:main": {}
 	}
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
