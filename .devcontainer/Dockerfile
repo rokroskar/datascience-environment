@@ -1,5 +1,9 @@
 FROM mcr.microsoft.com/devcontainers/miniconda:1-3
 
+# install pixi
+RUN curl -fsSL https://pixi.sh/install.sh | PIXI_HOME=/usr/local/share/pixi bash && \
+    ln -s /usr/local/share/pixi/bin/pixi /usr/local/bin
+
 # Copy environment.yml (if found) to a temp location so we update the environment. Also
 # copy "noop.txt" so the COPY instruction does not fail if no environment.yml exists.
 COPY environment.yml* .devcontainer/noop.txt /tmp/conda-tmp/
