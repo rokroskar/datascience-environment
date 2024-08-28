@@ -1,14 +1,22 @@
 FROM mcr.microsoft.com/devcontainers/miniconda:1-3
 
-# install pixi
-RUN curl -fsSL https://pixi.sh/install.sh | PIXI_HOME=/usr/local/share/pixi bash && \
-    ln -s /usr/local/share/pixi/bin/pixi /usr/local/bin
+# install jupyterlab
+ENV CONDA_ENVS_DIRS /work/envs
+ENV SHELL=/bin/bash
+RUN conda install -y jupyterlab
 
 # Copy environment.yml (if found) to a temp location so we update the environment. Also
 # copy "noop.txt" so the COPY instruction does not fail if no environment.yml exists.
 COPY environment.yml* .devcontainer/noop.txt /tmp/conda-tmp/
-RUN if [ -f "/tmp/conda-tmp/environment.yml" ]; then umask 0002 && /opt/conda/bin/conda env update -n base -f /tmp/conda-tmp/environment.yml; fi \
-    && rm -rf /tmp/conda-tmp
+
+
+USER 1000
+RUN if [ -f "/tmp/conda-tmp/environment.yml" ]; then umask 0002 && \
+    /opt/conda/bin/conda env create -n project -f /tmp/conda-tmp/environment.yml; fi && \
+    conda init && \
+    conda install -n project ipykernel && \
+    /opt/conda/envs/project/bin/python -m ipykernel install --name project --display-name "Project environment" --user && \
+    echo "conda activate project" >> $HOME/.bashrc
 
 # [Optional] Uncomment to install a different version of Python than the default
 # RUN conda install -y python=3.6 \
