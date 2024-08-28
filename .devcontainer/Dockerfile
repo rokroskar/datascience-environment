@@ -3,7 +3,8 @@ FROM mcr.microsoft.com/devcontainers/miniconda:1-3
 # install jupyterlab
 ENV CONDA_ENVS_DIRS /work/envs
 ENV SHELL=/bin/bash
-RUN conda install -y jupyterlab
+RUN conda install -y jupyterlab && \
+    ln -s /opt/conda/bin/jupyter-lab /opt/conda/bin/jupyter-notebook
 
 # Copy environment.yml (if found) to a temp location so we update the environment. Also
 # copy "noop.txt" so the COPY instruction does not fail if no environment.yml exists.
