@@ -4,6 +4,7 @@ FROM mcr.microsoft.com/devcontainers/miniconda:1-3
 ENV CONDA_ENVS_DIRS /work/envs
 ENV SHELL=/bin/bash
 RUN conda install -y jupyterlab && \
+    jupyter labextension disable "@jupyterlab/apputils-extension:announcements" && \
     ln -s /opt/conda/bin/jupyter-lab /opt/conda/bin/jupyter-notebook
 
 # Copy environment.yml (if found) to a temp location so we update the environment. Also
