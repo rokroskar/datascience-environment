@@ -8,5 +8,6 @@ name: "base"
 # these restrictions completely.
 channels:
   - conda-forge
-dependencies: []
+dependencies: 
+  - code-server
 prefix: "/opt/conda"
