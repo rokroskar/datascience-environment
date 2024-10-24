@@ -1,9 +1,12 @@
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the
-// README at: https://github.com/devcontainers/templates/tree/main/src/miniconda
 {
-	"name": "Miniconda (Python 3)",
-	"build": {
-		"context": "..",
-		"dockerfile": "Dockerfile"
+	"name": "Python 3",
+	"image": "neo4j",
+
+	"features": {
+		"ghcr.io/SwissDataScienceCenter/devcontainer-features/renku:1": {},
+        "ghcr.io/devcontainers/features/python:1": {
+            "version": "3.10"
+        },
+        "ghcr.io/rocker-org/devcontainer-features/miniforge:2": {},
 	}
 }
